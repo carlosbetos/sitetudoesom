@@ -264,7 +264,7 @@
         .footer {
             background: var(--cor-roxa);
             color: white;
-            padding: 80px 20px 40px;
+            padding: 80px 20px 60px; /* Aumentei um pouco o padding inferior */
             text-align: center;
             position: relative;
             /* Borda superior ondulada */
@@ -286,21 +286,50 @@
             transform: scale(1.05);
         }
 
+        /* --- NOVOS ESTILOS PARA AS REDES SOCIAIS NO RODAPÉ --- */
+        
+        /* Container para alinhar os botões */
+        .social-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite que quebrem linha em telas menores */
+            gap: 20px; /* Espaço entre os botões */
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        /* Estilo do botão de rede social */
         .social-link {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--cor-amarela);
-            font-weight: 700;
+            background-color: white; /* Fundo branco para destacar no roxo */
+            color: var(--cor-roxa); /* Cor do texto */
+            padding: 12px 25px;
+            border-radius: 30px; /* Bordas bem arredondadas */
             text-decoration: none;
-            font-size: 1.2rem;
+            font-weight: 700;
+            font-family: 'Fredoka', sans-serif;
+            box-shadow: 0 4px 0px rgba(0,0,0,0.1); /* Sombra sutil */
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            border: 2px solid transparent; /* Borda transparente inicial */
+        }
+
+        /* Efeito ao passar o mouse no botão */
+        .social-link:hover {
+            transform: translateY(-3px); /* Move ligeiramente para cima */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2); /* Sombra aumenta */
+            border-color: var(--cor-amarela); /* Borda amarela ao passar o mouse */
         }
         
+        /* Estilo da imagem do ícone dentro do botão */
         .social-icon-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid var(--cor-amarela);
+            width: 24px;
+            height: 24px;
+            margin-right: 12px;
+            object-fit: contain;
+            /* Removemos as bordas antigas para ficar limpo dentro do botão branco */
+            border: none;
+            border-radius: 0;
         }
 
         /* --- Responsividade --- */
@@ -309,6 +338,9 @@
             .hero { padding-bottom: 80px; border-radius: 0 0 30% 30% / 30px; }
             .section-title { font-size: 2rem; }
             .play-card { padding: 30px 20px; }
+            /* Ajuste para os botões sociais em telas pequenas */
+            .social-container { flex-direction: column; align-items: center; gap: 15px; }
+            .social-link { width: 80%; justify-content: center; }
         }
     </style>
 </head>
@@ -441,7 +473,7 @@
     <footer class="footer" id="download">
         <div class="container">
             <h2>Pronto para a Diversão?</h2>
-            <p style="font-size: 1.3rem; margin-bottom: 30px;">Baixe o aplicativo oficial agora e transforme sua sala de estar.</p>
+            <p style="font-size: 1.3rem; margin-bottom: 30px;">Baixe o aplicativo e use a tecnologia para reunir a família em volta da mesa, como nos velhos tempos.</p>
             
             <div class="app-badges">
                 <a href="https://play.google.com/store/apps/details?id=br.com.tudoesom" target="_blank">
@@ -449,25 +481,24 @@
                 </a>
             </div>
 
-    <div class="social-container">
-    <a href="https://instagram.com/tudoesom" target="_blank" class="social-link instagram">
-        <img src="./assets/img/perfil instagram.png" alt="Ícone Instagram" class="social-icon-img">
-        <span>Instagram @tudoesom</span>
-    </a>
+            <div class="social-container">
+                <a href="https://instagram.com/tudoesom" target="_blank" class="social-link">
+                    <img src="./assets/img/perfil instagram.png" alt="Ícone Instagram" class="social-icon-img">
+                    <span>Siga @tudoesom</span>
+                </a>
 
-    <a href="https://www.tiktok.com/@tudoesomeimagem" target="_blank" class="social-link tiktok">
-        <img src="./assets/img/tiktok.png" alt="Ícone TikTok" class="social-icon-img">
-        <span>TikTok @tudoesomeimagem</span>
-    </a>
+                <a href="https://www.tiktok.com/@tudoesomeimagem" target="_blank" class="social-link">
+                     <img src="./assets/img/tiktok.png" alt="Ícone TikTok" class="social-icon-img">
+                    <span>Siga @tudoesomeimagem</span>
+                </a>
 
-    <a href="https://www.facebook.com/tudoesom" target="_blank" class="social-link facebook">
-        <img src="./assets/img/facebook.png" alt="Ícone Facebook" class="social-icon-img">
-        <span>Facebook @tudoesom</span>
-    </a>
-</div>
-            
+                <a href="https://www.facebook.com/tudoesom" target="_blank" class="social-link">
+                     <img src="./assets/img/facebook.png" alt="Ícone Facebook" class="social-icon-img">
+                    <span>Curta @tudoesom</span>
+                </a>
+            </div>
             <p style="margin-top: 40px; font-size: 0.9rem; opacity: 0.8;">
-                &copy; 2025 Tudo é Som. Idealizado por Carlos Alberto da Silva Teixeira. <br>Todos os direitos reservados.
+                &copy; 2025 Tudo é Som.Carlos Alberto e a Psicopedagoga Fabiana Alves. <br>Todos os direitos reservados.
             </p>
         </div>
     </footer>
