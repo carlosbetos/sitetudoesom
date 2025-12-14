@@ -3,67 +3,464 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baixar App - Tudo é Som</title>
+    <title>Tudo é Som | O Jogo que Une Gerações</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Estilos para deixar a página bonita e centralizada */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f0f2f5;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh; /* Altura total da tela */
+        /* --- Variáveis de Cores (Paleta do Jogo) --- */
+        :root {
+            --cor-vermelha: #FF4D4D;
+            --cor-amarela: #FFD700;
+            --cor-azul: #3498DB;
+            --cor-verde: #2ECC71;
+            --cor-roxa: #9B59B6;
+            --cor-texto: #2c3e50;
+            --cor-fundo-claro: #F7F9FC;
+            --sombra-suave: 0 8px 20px rgba(0,0,0,0.1);
+            --sombra-botao: 0 4px 0px #d4b200;
+        }
+
+        /* --- Reset e Estilos Globais --- */
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
             box-sizing: border-box;
         }
 
+        body {
+            font-family: 'Nunito', sans-serif; /* Fonte do corpo do texto */
+            color: var(--cor-texto);
+            background-color: var(--cor-fundo-claro);
+            background-image: radial-gradient(#e0e7ff 1px, transparent 1px); /* Padrão de bolinhas sutil no fundo */
+            background-size: 20px 20px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Fredoka', sans-serif; /* Fonte divertida para títulos */
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
         .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* --- Botões Lúdicos --- */
+        .btn-game {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: var(--cor-amarela);
+            color: var(--cor-texto);
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            border: 3px solid #fff;
+            box-shadow: var(--sombra-botao);
+            transition: all 0.2s ease;
+            position: relative;
+            top: 0;
+        }
+
+        .btn-game:hover {
+            top: 2px;
+            box-shadow: 0 2px 0px #d4b200;
+            background-color: #ffe03d;
+        }
+
+        .btn-purple {
+            background-color: var(--cor-roxa);
+            color: white;
+            box-shadow: 0 4px 0px #763a8f;
+            border: none;
+        }
+        .btn-purple:hover {
+             box-shadow: 0 2px 0px #763a8f;
+             background-color: #aa6bc4;
+        }
+
+        /* --- HEADER & HERO SECTION --- */
+        .header {
             text-align: center;
-            max-width: 400px;
-            width: 100%;
+            padding: 20px 0;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-
-        h1 {
-            color: #202124;
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-
-        p {
-            color: #5f6368;
-            margin-bottom: 30px;
-            line-height: 1.5;
-        }
-
-        /* Estilo do botão da imagem */
-        .google-play-btn img {
-            width: 200px; /* Tamanho padrão do botão */
+        
+        .logo-img {
+            max-width: 220px;
             height: auto;
-            transition: transform 0.2s ease;
         }
 
-        /* Efeito ao passar o mouse */
-        .google-play-btn img:hover {
+        .hero {
+            text-align: center;
+            padding: 80px 20px 120px;
+            /* Gradiente divertido de fundo */
+            background: linear-gradient(135deg, var(--cor-azul) 0%, var(--cor-roxa) 100%);
+            color: white;
+            border-radius: 0 0 50% 50% / 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-weight: 600;
+        }
+        
+        /* Elementos flutuantes decorativos no fundo */
+        .floating-shape {
+            position: absolute;
+            opacity: 0.2;
+            z-index: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        /* --- SEÇÕES DE CONTEÚDO --- */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--cor-azul);
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        /* Sublinhado ondulado divertido */
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 8px;
+            background-color: var(--cor-amarela);
+            margin: 10px auto 0;
+            border-radius: 10px;
+            background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,0.5) 5px, rgba(255,255,255,0.5) 10px);
+        }
+
+        /* Cards Lúdicos */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .play-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 30px;
+            box-shadow: var(--sombra-suave);
+            text-align: center;
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .play-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--cor-amarela);
+        }
+
+        .card-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            /* Efeito de balanço no ícone */
+            animation: wiggle 3s ease-in-out infinite;
+        }
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        .play-card h3 {
+            color: var(--cor-roxa);
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* --- SEÇÃO COMO FUNCIONA (Passo a Passo) --- */
+        .steps-container {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step-item {
+            flex: 1 1 250px;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--cor-vermelha);
+            color: white;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(237, 28, 36, 0.4);
+        }
+
+        /* --- SEÇÃO IDIOMAS --- */
+        .languages-box {
+            background-color: white;
+            padding: 50px;
+            border-radius: 40px;
+            box-shadow: var(--sombra-suave);
+            text-align: center;
+            border: 4px dashed var(--cor-azul);
+        }
+
+        .lang-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .lang-tag {
+            padding: 10px 25px;
+            background: var(--cor-fundo-claro);
+            border-radius: 50px;
+            font-weight: 700;
+            font-family: 'Fredoka', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid var(--cor-azul);
+        }
+
+        /* --- FOOTER --- */
+        .footer {
+            background: var(--cor-roxa);
+            color: white;
+            padding: 80px 20px 40px;
+            text-align: center;
+            position: relative;
+            /* Borda superior ondulada */
+            clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+            margin-top: -50px; 
+        }
+
+        .footer h2 {
+            font-size: 2.5rem;
+            color: var(--cor-amarela);
+        }
+
+        .app-badges img {
+            height: 70px;
+            margin: 20px 10px;
+            transition: transform 0.2s;
+        }
+        .app-badges img:hover {
             transform: scale(1.05);
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--cor-amarela);
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 1.2rem;
+        }
+        
+        .social-icon-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid var(--cor-amarela);
+        }
+
+        /* --- Responsividade --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero { padding-bottom: 80px; border-radius: 0 0 30% 30% / 30px; }
+            .section-title { font-size: 2rem; }
+            .play-card { padding: 30px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
-        <h1>Instale o Aplicativo</h1>
-        <p>Clique no botão abaixo para ser redirecionado para a loja e instalar o app "Tudo é Som".</p>
+    <header class="header">
+        <div class="container">
+            <img src="./assets/img/Logo - Tudo é Som.jpg" alt="Logo Tudo é Som" class="logo-img">
+        </div>
+    </header>
 
-        <a href="https://play.google.com/store/search?q=tudo%20%C3%A9%20som&c=apps&utm_source=latam_Med" class="google-play-btn" target="_blank" rel="noopener noreferrer">
-            <img src="https://play.google.com/intl/pt-BR/badges/static/images/badges/pt-br_badge_web_generic.png" alt="Disponível no Google Play">
-        </a>
-    </div>
+    <section class="hero">
+        <div class="floating-shape" style="top: 10%; left: 5%; font-size: 4rem;">🎲</div>
+        <div class="floating-shape" style="top: 20%; right: 10%; font-size: 3rem; animation-delay: 1s;">📱</div>
+        <div class="floating-shape" style="top: 60%; left: 15%; font-size: 5rem; animation-delay: 2s;">🎵</div>
+
+        <div class="container">
+            <h1>O Resgate da Diversão em Família com a Mágica da Tecnologia</h1>
+            <p>O jogo de tabuleiro que fala! Uma aventura que tira as crianças do isolamento das telas e reúne todos na sala.</p>
+            <a href="#download" class="btn-game">BAIXAR O APLICATIVO</a>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Nostalgia + Inovação</h2>
+            <div class="card-grid">
+                <div class="play-card">
+                    <span class="card-icon">🎲</span>
+                    <h3>Tabuleiro Clássico</h3>
+                    <p>O charme dos jogos dos anos 80 e 90 que aproxima as pessoas fisicamente ao redor da mesa.</p>
+                </div>
+                <div class="play-card" style="border-color: var(--cor-azul);">
+                    <span class="card-icon">📱</span>
+                    <h3>Tecnologia Mágica</h3>
+                    <p>O celular deixa de ser um isolante e vira a ferramenta que dá voz e som ao jogo.</p>
+                </div>
+                <div class="play-card" style="border-color: var(--cor-verde);">
+                    <span class="card-icon">👨‍👩‍👧‍👦</span>
+                    <h3>Para Toda Família</h3>
+                    <p>De 6 a 99 anos. A desculpa perfeita para pais, filhos e avós brincarem juntos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background-color: #eef2f7;">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--cor-vermelha);">Como a Mágica Acontece</h2>
+            
+            <div style="text-align: center; margin-bottom: 40px;">
+                 <p style="background: #fff; padding: 20px; border-radius: 15px; display: inline-block; border: 2px dashed var(--cor-texto);">📷 <em>(Espaço reservado para foto do jogo em ação)</em></p>
+            </div>
+
+            <div class="steps-container">
+                <div class="step-item">
+                    <div class="step-number">1</div>
+                    <h3>Escaneou</h3>
+                    <p>Aponte a câmera do App para o <strong>QR Code</strong> no tabuleiro ou carta.</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number" style="background-color: var(--cor-azul);">2</div>
+                    <h3>Ouviu</h3>
+                    <p>O App diz a palavra e faz o <strong>som real</strong> (um rugido, um instrumento...).</p>
+                </div>
+                <div class="step-item">
+                    <div class="step-number" style="background-color: var(--cor-verde);">3</div>
+                    <h3>Achou!</h3>
+                    <p>Corra para encontrar a <strong>imagem física</strong> correspondente no tabuleiro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="languages-box">
+                <h2 class="section-title" style="margin-bottom: 20px;">Laboratório de Idiomas Divertido</h2>
+                <p style="font-size: 1.2rem;">Aprender nunca foi tão natural. Mude o idioma do jogo com um toque na tela inicial!</p>
+                
+                <div class="lang-tags">
+                    <div class="lang-tag">🇧🇷 Português (Alfabetização)</div>
+                    <div class="lang-tag">🇺🇸 Inglês</div>
+                    <div class="lang-tag">🇪🇸 Espanhol</div>
+                    <div class="lang-tag">🇫🇷 Francês</div>
+                </div>
+
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 2px solid #eee;">
+                    <h4 style="color: var(--cor-roxa); margin-bottom: 10px;">🧠 A Ciência da Diversão (Teoria do Duplo-Código)</h4>
+                    <p>Curadoria pedagógica de Fabiana Alves. Unir SOM + IMAGEM reforça a memória e acelera o aprendizado. Excelente inclusive para disléxicos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background: var(--cor-azul); color: white;">
+         <div class="container">
+            <h2 class="section-title" style="color: var(--cor-amarela);">Projeto Tudo é Som</h2>
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+                <p style="background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; display: inline-block;">📦 <em>(Espaço reservado para foto dos componentes do jogo)</em></p>
+           </div>
+
+            <div class="card-grid" style="color: var(--cor-texto);">
+                <div class="play-card">
+                    <h3>🗺️ Tabuleiro Modular</h3>
+                    <p>5 partes gigantes que se montam, com 69 imagens e trilha.</p>
+                </div>
+                <div class="play-card">
+                    <h3>🃏 Super Baralho</h3>
+                    <p>48 cartas ilustradas com QR Codes inteligentes.</p>
+                </div>
+                <div class="play-card">
+                    <h3>📲 App Gratuito</h3>
+                    <p>O "cérebro" do jogo. Disponível para Android.</p>
+                </div>
+            </div>
+         </div>
+    </section>
+
+     <section class="section">
+        <div class="container" style="background: #fff4e6; padding: 40px; border-radius: 30px; border: 3px solid var(--cor-amarela); text-align: center;">
+            <span style="font-size: 3rem;">🎓</span>
+            <h2 style="color: var(--cor-texto);">Você é Diretor ou Professor?</h2>
+            <p style="margin: 20px 0;">Leve o <strong>Tudo é Som</strong> para sua escola! Conheça nosso "Teste Piloto" com relatórios de engajamento e vocabulário para o Ensino Fundamental I.</p>
+            <a href="#" class="btn-game btn-purple">SOLICITAR PROPOSTA ESCOLAR</a>
+        </div>
+    </section>
+
+    <footer class="footer" id="download">
+        <div class="container">
+            <h2>Pronto para a Diversão?</h2>
+            <p style="font-size: 1.3rem; margin-bottom: 30px;">Baixe o aplicativo oficial agora e transforme sua sala de estar.</p>
+            
+            <div class="app-badges">
+                <a href="https://play.google.com/store/apps/details?id=br.com.tudoesom" target="_blank">
+                    <img src="https://play.google.com/intl/en_us/badges/static/images/badges/pt-br_badge_web_generic.png" alt="Disponível no Google Play">
+                </a>
+            </div>
+
+            <div style="margin-top: 50px;">
+                <a href="https://instagram.com/tudoesom" target="_blank" class="social-link">
+                    <img src="./assets/img/perfil instagram.png" alt="Ícone Instagram" class="social-icon-img">
+                    Siga @tudoesom
+                </a>
+            </div>
+            
+            <p style="margin-top: 40px; font-size: 0.9rem; opacity: 0.8;">
+                &copy; 2025 Tudo é Som. Idealizado por Carlos Alberto da Silva Teixeira. <br>Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
 
 </body>
 </html>
